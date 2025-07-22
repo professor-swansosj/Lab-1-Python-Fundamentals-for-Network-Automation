@@ -29,3 +29,6 @@ jobs:
         grep -q "PARSE_XML_SUCCESS" logs/lab.log
         grep -q "PARSE_CSV_SUCCESS" logs/lab.log
         grep -q "DEVICE_SUMMARY" logs/lab.log
+        grep -q "INTERFACE_MSG" logs/lab.log
+        grep -q "DEVICE_MSG" logs/lab.log
+        grep -q "VLAN_MSG" logs/lab.log

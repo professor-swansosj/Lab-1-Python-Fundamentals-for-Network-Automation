@@ -63,7 +63,7 @@ interfaces:
 ```
 
 ### XML
-XML has been presented to network engineers for a long time already. The Cisco Nexus platform, Juniper, and Palo Alto all represent their configuration in XML. Heck the entire language of web pages `HTML` is XML. XML is not very human readable but great for machines to process. It uses the concept of tags<> and nested objects to represnt their informatoin. Every tag that is created must also be accompanied by a closing tag. Below we see some XML to represent a list of VLANS.
+XML has been presented to network engineers for a long time already. The Cisco Nexus platform, Juniper, and Palo Alto all represent their configuration in XML. Heck the entire language of web pages `HTML` is XML. XML is not very human readable but great for machines to process. It uses the concept of tags `<>` and nested objects to represnt their informatoin. Every tag that is created must also be accompanied by a closing tag. Below we see some XML to represent a list of VLANS.
 
 ```xml
 <vlans>
@@ -121,7 +121,7 @@ network-automation-lab/
 ## Components:
 
 ### 1. **Classes and Methods** (`network_device.py`)
-Explanations are included below as Python comments with `#` which python will ignore when ran. These are simply notes from one developer to another. Multiline comments in python are annotated with ``` for both opening or closing the comment. 
+In python we define objects by defining the class. Think of an object as a way to represent anything in the real world. The attributes help to describe the object. Inside an object we can also define methods which are functions that are related to our object.
 ```python
 import logging #This is where we import the built in python logging module
 
@@ -138,6 +138,10 @@ class NetworkDevice: #Define our Class object of NetworkDevice
 ```
 
 ### 2. **Functions and Error Handling** (`parser_utils.py`)
+A python function is a block of code that can be called after it is defined. As a best practice you typically want to break up as much of your code as possible into mutliple functions. As a genneral guidline you should aim to have your functions be no longer than 20-30 lines of code. Most of the time you will need to pass information into your function so it can perform some type of logic on the data. In the function below we pass a path argument into the function `parse_json()`. With a path to a JSON file passed into the function the code attempts to open the file in read mode and load the data as a python object to be worked with.
+
+**Exceptions and Error Handling**  
+You will notice in this function the use of the syntax `try:` and `except` which is a python feature that allows you to gracefully handle errors in your code without it crashing the entire program. In our example below the function starts with the `try:` statement essentially saying "Try to open the file at this path and load the JSON data to convert it to a python object. If the path to a valid JSON file is correct the code executes as designed and returns the resulting python object. If the path is invalid say the file does not exist or is not a valid JSON file the program won't crash with a Traceback and Exception message. Instead it will create a error log message attaching the error to the log message and returns nothing.
 ```python
 import json, yaml, xml.etree.ElementTree as ET, csv, logging
 
@@ -155,31 +159,49 @@ def parse_json(path):
 ```
 
 ### 3. **Main Application** (`main.py`)
+In the main application file we need to import all of our functions and classes so they can be utlizized by the main program. Here we define our `main()` function which is where the main logic of your program executes. To put this all into perspective we could have declared all of our functions and classes in a single python file or not broken up our code at all and made a single long program on one page. This is however a bad practice and fails to take advatage of pythons object oriented nature where we break up our objects and the logic of our code into classes and functions. Here we import them all to run the main purpose of our program in this case importing a network device as a static structured data file and summarize the device.
 ```python
-import logging
-from src.parser_utils import parse_json, parse_yaml, parse_xml, parse_csv
-from src.network_device import NetworkDevice
+import logging  #Imports logging as we are logging all of our codes output to a log file. 
+from src.parser_utils import parse_json, parse_yaml, parse_xml, parse_csv #Note this imports our functions in the src file
+from src.network_device import NetworkDevice #This is the import of our class object from the src file
 
-logging.basicConfig(filename='logs/lab.log', level=logging.INFO)
+logging.basicConfig(filename='logs/lab.log', level=logging.INFO) #Logs output to the lab.log file
 
-def main():
-    json_devices = parse_json('data/devices.json')
-    for d in json_devices:
-        dev = NetworkDevice(d['hostname'], d['ip'], d['type'])
-        dev.summarize()
+def main():                       #This defines our main function which should be set to execute our imported function
+    json_devices = parse_json('data/devices.json') #Declares an object created from our immported function and JSON file
+    for d in json_devices:                         #Starts a for loop to loop over our JSON object
+        dev = NetworkDevice(d['hostname'], d['ip'], d['type']) #Creates a network device object using the JSON information
+        dev.summarize()  #Calls our objects method to summarize information about the object
 
-if __name__ == '__main__':
-    main()
+if __name__ == '__main__':  #The starting point for our code called the name-main idiom only true if this is the main file
+    main()                  #Executes the main function
 ```
+
+---
+## :memo: Instructions
+
+1. Build off the program that was provided to you. 
+2. In the `main()` function create python objects using the parsers that were defined in the `parser_utils.py` file and the structured data in the data directory. This will a python object of an inventory of devices, list of vlans, and network interfaces.
+3. Utlizizing whatever technique you wish the program should print the below messages to the terminal by accessing each object. Note: that below has a place holder for the attribute but your program should print the actual value of the attribute. 
+    - `Interface { interface.name } is { interface.status }`
+    - `Device { device.hostname } is a { device.location } { device.role }`
+    - `VLAN { vlan.id } is the { vlan.name }`
+4. Under each print statement include an INFO log message to create the a log message for each of the statements to the log file. The syntax for this is provided below. You only need to change the name of the message object.
+    - `logging.info(f"INTERFACE_MSG: {msg}")`
+    - `logging.info(f"DEVICE_MSG: {msg}")`
+    - `logging.info(f"VLAN_MSG: {msg}")`
 
 ---
 
 ## ✅ Grading Points Breakdown (example)
-- 2 pts: JSON parsed correctly (`PARSE_JSON_SUCCESS` in log)
-- 2 pts: At least one device summarized (`DEVICE_SUMMARY` log)
-- 2 pts: Error logged properly if missing file (`PARSE_JSON_ERROR`)
-- 1 pt each: Similar logic for YAML, XML, and CSV parsing
-
+- 5 pts: JSON parsed correctly (`PARSE_JSON_SUCCESS` log)
+- 5 pts: At least one device summarized (`DEVICE_SUMMARY` log)
+- 5 pts: YAML parsed correctly (`PARSE_YAML_SUCCESS` log)
+- 5 pts: YAML Interface message (`INTERFACE_MSG` log)
+- 5 pts: YAML parsed correctly (`PARSE_CSV_SUCCESS` log)
+- 5 pts: YAML Interface message (`DEVICE_MSG` log)
+- 5 pts: YAML parsed correctly (`PARSE_XML_SUCCESS` log)
+- 5 pts: YAML Interface message (`VLAN_MSG` log)
 ---
 
 
