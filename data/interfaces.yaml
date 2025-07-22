@@ -1,0 +1,7 @@
+interfaces:
+  - name: Gig0/1
+    status: up
+    vlan: 10
+  - name: Gig0/2
+    status: down
+    vlan: 20

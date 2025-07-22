@@ -1,0 +1,4 @@
+[
+  {"hostname": "core-sw01", "ip": "192.168.1.1", "type": "Switch"},
+  {"hostname": "edge-fw01", "ip": "192.168.1.254", "type": "Firewall"}
+]

@@ -1,0 +1,3 @@
+hostname,location,role
+core-sw01,DataCenter,Switch
+edge-fw01,Branch,Firewall

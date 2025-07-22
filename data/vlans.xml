@@ -1,0 +1,10 @@
+<vlans>
+  <vlan>
+    <id>10</id>
+    <name>Users</name>
+  </vlan>
+  <vlan>
+    <id>20</id>
+    <name>Servers</name>
+  </vlan>
+</vlans>
