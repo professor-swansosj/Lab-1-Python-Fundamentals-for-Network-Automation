@@ -13,7 +13,7 @@ From a network automation perspective we leverage more advanced features in Pyth
 
 - Ansible = YAML (Used to write Ansible Playbooks)
 - REST API Calls = JSON (Requests to Restful API Servers are written and results returned in JSON)
-- NETCONNF = XML (The NETCONF protocol uses XML to write it's requests and return results)
+- NETCONF = XML (The NETCONF protocol uses XML to write it's requests and return results)
 - INVENTORY = CSV (Many appliances and automation tools uses CSV files to pass in the inventory of devices)
 
 ### :wrench: Python Functions
@@ -27,7 +27,7 @@ A Python object is a defined Class where the attributes of the class help to def
 
 There may be times where our code is going to fail.  When a block of code fails you recieve two things of importance 1) The traceback on where the failure occured in the code. 2) The Exception that was raised which can be translated to the error message. When a Exception is raised in Python it halts the execution of the code where it is and produces these two items. However, what if we don't want our entire program to fail based on a minor error? This is where Error Handling and Exceptions come in. Using Pythons built in `Try:...Except:` features you can gracefully handle the error and how you want the program to procede whether that be printing the error to a file, stopping the program, or do nothing and continue with the code execution.
 
-### :page_facing_ip: Logging
+### :page_facing_up: Logging
 
 A note on the logging syntax you see here. It is usually a good idea to capture all your logs to a file and export to a central logging system. Although we are not going to go too deep on logging know it is a standard feature and procedure when writing your code to write the logs to a file. We are doing it here for a very important reason which is **THE LOGS WRITTEN TO THE LOG FILE IS WHAT IS USED TO DETERMINE YOUR GRADE!!!** If your script does not produce any logs to the log file the file will be blank and therefore you will not receive credit for your work. Under each instruction I will inform you where you are to insert a logging message so I know the program executed with all the requirements.
 
