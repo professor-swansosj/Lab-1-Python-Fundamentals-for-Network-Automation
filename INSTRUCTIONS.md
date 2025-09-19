@@ -100,12 +100,12 @@ LOG REQUIREMENT: `[STEP 2] Dev Container Started`
 
 ## Grading and Points Breakdown
 
-Step | Requirement | Log String | Points
-|---|---|---|---|
-Step 1 | Repo Cloned | `[Step 1] Repo Cloned Successfully` | 5
-Step 2 | Requirement 2 | `[Step 2] Log String` | 10
-Step 3 | Requirement 3 | `[Step 3] Log String` | 10
-Step 4 | Requirement 4 | `[Step 4] Log String` | 10
+Step | Requirement | Log String | Points |
+|----|-------------|------------|--------|
+Step 1 | Repo Cloned | `[Step 1] Repo Cloned Successfully` | 5 |
+Step 2 | Requirement 2 | `[Step 2] Log String` | 10 |
+Step 3 | Requirement 3 | `[Step 3] Log String` | 10 |
+Step 4 | Requirement 4 | `[Step 4] Log String` | 10 |
 
 ## Submission Checklist
 :green_checkmark: Repo Cloned
