@@ -13,21 +13,32 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
+      # ✅ Passes in template repo; real checks only run in lab repos
+      - name: Skip in template repo
+        if: ${{ github.repository == 'professor-swansosj/SDN-LAB-TEMPLATE' }}
+        run: echo "Template repo detected — Verify Docs is a no-op here."
+
       - uses: actions/checkout@v4
+        if: ${{ github.repository != 'professor-swansosj/SDN-LAB-TEMPLATE' }}
 
       - uses: actions/setup-python@v5
+        if: ${{ github.repository != 'professor-swansosj/SDN-LAB-TEMPLATE' }}
         with:
           python-version: "3.11"
-      - run: pip install jinja2 pyyaml
 
-      - name: Checkout SDN-LAB-TEMPLATE (the source of truth)
+      - run: pip install jinja2 pyyaml
+        if: ${{ github.repository != 'professor-swansosj/SDN-LAB-TEMPLATE' }}
+
+      - name: Checkout SDN-LAB-TEMPLATE (source of truth)
+        if: ${{ github.repository != 'professor-swansosj/SDN-LAB-TEMPLATE' }}
         uses: actions/checkout@v4
         with:
           repository: professor-swansosj/SDN-LAB-TEMPLATE
           path: _template
-          ref: main   # later we can pin to a tag/SHA for reproducibility
+          ref: main
 
       - name: Ensure lab.yml exists
+        if: ${{ github.repository != 'professor-swansosj/SDN-LAB-TEMPLATE' }}
         run: |
           if [ ! -f lab.yml ]; then
             echo "::error ::lab.yml is missing in this lab repo"
@@ -35,17 +46,19 @@ jobs:
           fi
 
       - name: Render from template
+        if: ${{ github.repository != 'professor-swansosj/SDN-LAB-TEMPLATE' }}
         run: |
           mkdir -p _render
           python _template/scripts/render.py lab.yml _render
 
       - name: Diff README
+        if: ${{ github.repository != 'professor-swansosj/SDN-LAB-TEMPLATE' }}
         run: |
           diff -u --strip-trailing-cr README.md _render/README.md \
             || (echo "::error file=README.md::README.md is out of date; re-render from template"; exit 1)
 
       - name: Diff INSTRUCTIONS
+        if: ${{ github.repository != 'professor-swansosj/SDN-LAB-TEMPLATE' }}
         run: |
           diff -u --strip-trailing-cr INSTRUCTIONS.md _render/INSTRUCTIONS.md \
             || (echo "::error file=INSTRUCTIONS.md::INSTRUCTIONS.md is out of date; re-render from template"; exit 1)
-
