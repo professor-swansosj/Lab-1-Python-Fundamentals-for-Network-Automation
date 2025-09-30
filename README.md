@@ -7,13 +7,12 @@
 ## Repository structure
 
 ```text
-target
+Lab-1-Python-Fundamentals-for-Network-Automation
 ├── .devcontainer
 │   └── devcontainer.json
 ├── .gitignore
 ├── .markdownlint.json
 ├── .markdownlintignore
-├── .pettierrc.yml
 ├── INSTRUCTIONS.backup.md
 ├── INSTRUCTIONS.md
 ├── README.backup.md
@@ -24,7 +23,6 @@ target
 │   ├── inventory.csv
 │   └── vlans.xml
 ├── lab.yml
-├── prettierrc.yml
 ├── requirements.txt
 └── src
     ├── __init__.py
