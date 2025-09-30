@@ -7,142 +7,30 @@
 ## Repository structure
 
 ```text
-SDN-LAB-TEMPLATE
-├── .git
-│   ├── FETCH_HEAD
-│   ├── HEAD
-│   ├── config
-│   ├── config.worktree
-│   ├── description
-│   ├── hooks
-│   │   ├── applypatch-msg.sample
-│   │   ├── commit-msg.sample
-│   │   ├── fsmonitor-watchman.sample
-│   │   ├── post-update.sample
-│   │   ├── pre-applypatch.sample
-│   │   ├── pre-commit.sample
-│   │   ├── pre-merge-commit.sample
-│   │   ├── pre-push.sample
-│   │   ├── pre-rebase.sample
-│   │   ├── pre-receive.sample
-│   │   ├── prepare-commit-msg.sample
-│   │   ├── push-to-checkout.sample
-│   │   ├── sendemail-validate.sample
-│   │   └── update.sample
-│   ├── index
-│   ├── info
-│   │   └── exclude
-│   ├── logs
-│   │   ├── HEAD
-│   │   └── refs
-│   ├── objects
-│   │   ├── 03
-│   │   ├── 14
-│   │   ├── 23
-│   │   ├── 28
-│   │   ├── 36
-│   │   ├── 39
-│   │   ├── 3e
-│   │   ├── 4e
-│   │   ├── 59
-│   │   ├── 5b
-│   │   ├── 5e
-│   │   ├── 62
-│   │   ├── 63
-│   │   ├── 67
-│   │   ├── 74
-│   │   ├── 75
-│   │   ├── 8c
-│   │   ├── 9b
-│   │   ├── a1
-│   │   ├── bd
-│   │   ├── c9
-│   │   ├── cb
-│   │   ├── d0
-│   │   ├── d5
-│   │   ├── dc
-│   │   ├── de
-│   │   ├── e9
-│   │   ├── ed
-│   │   ├── f2
-│   │   ├── fd
-│   │   ├── info
-│   │   └── pack
-│   ├── refs
-│   │   ├── heads
-│   │   ├── remotes
-│   │   └── tags
-│   └── shallow
-├── .github
-│   ├── CODEOWNERS
-│   └── workflows
-│       ├── audit-labs.yml
-│       ├── lint-docs.yml
-│       ├── smoke.yml
-│       ├── sync-common.yml
-│       └── verify-docs.yml
+target
+├── .devcontainer
+│   └── devcontainer.json
 ├── .gitignore
 ├── .markdownlint.json
 ├── .markdownlintignore
-├── .vscode
-│   └── settings.json
-├── LICENSE
+├── .pettierrc.yml
+├── INSTRUCTIONS.backup.md
+├── INSTRUCTIONS.md
+├── README.backup.md
 ├── README.md
+├── data
+│   ├── devices.json
+│   ├── interfaces.yaml
+│   ├── inventory.csv
+│   └── vlans.xml
+├── lab.yml
+├── prettierrc.yml
 ├── requirements.txt
-├── sample
-│   └── lab.yml
-├── schema
-│   └── lab.schema.json
-├── scripts
-│   ├── extract_lab_mata.py
-│   └── render.py
-├── style
-│   ├── .markdownlint.json
-│   ├── .markdownlintignore
-│   ├── .pettierrc.yml
-│   └── prettierrc.yml
-├── target
-│   ├── .devcontainer
-│   │   └── devcontainer.json
-│   ├── .git
-│   │   ├── HEAD
-│   │   ├── config
-│   │   ├── description
-│   │   ├── hooks
-│   │   ├── index
-│   │   ├── info
-│   │   ├── logs
-│   │   ├── objects
-│   │   ├── packed-refs
-│   │   ├── refs
-│   │   └── shallow
-│   ├── .github
-│   │   ├── CODEOWNERS
-│   │   └── workflows
-│   ├── .gitignore
-│   ├── .markdownlint.json
-│   ├── .markdownlintignore
-│   ├── .pettierrc.yml
-│   ├── INSTRUCTIONS.backup.md
-│   ├── INSTRUCTIONS.md
-│   ├── README.backup.md
-│   ├── README.md
-│   ├── data
-│   │   ├── devices.json
-│   │   ├── interfaces.yaml
-│   │   ├── inventory.csv
-│   │   └── vlans.xml
-│   ├── lab.yml
-│   ├── prettierrc.yml
-│   ├── requirements.txt
-│   └── src
-│       ├── __init__.py
-│       ├── main.py
-│       ├── network_device.py
-│       └── parser_utils.py
-└── templates
-    ├── INSTRUCTIONS.md.j2
-    └── README.md.j2
+└── src
+    ├── __init__.py
+    ├── main.py
+    ├── network_device.py
+    └── parser_utils.py
 ```
 
 
