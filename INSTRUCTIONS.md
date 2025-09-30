@@ -1,7 +1,30 @@
 # Instructions — Lab 1 — Python Fundamentals & Structured Data
 
+## Objectives
+- Build and use Python functions, classes, and methods.
+- Implement basic exception handling with try/except.
+- Work with structured data files: JSON, YAML, XML, and CSV.
+- Log meaningful events to a file for grading and troubleshooting.
+- Organize code into modules and run via the main guard.
+
+## Prerequisites
+- Python 3.11 (via the provided dev container)
+- Accounts: GitHub
+- Devices/Sandboxes: Local filesystem + sample structured data
+
+## Overview
+This lab warms up core Python skills for network automation. You’ll separate logic into modules (class + parsing helpers), read structured data (JSON, YAML, XML, CSV), and emit clear log lines that double as your grading criteria.
+
+
 > **Before you begin:** Open the dev container, confirm Python runs, and ensure you can list files under `data/` and write to `logs/`.
 
+
+## Resources
+- [Python logging](https://docs.python.org/3/library/logging.html)- [json](https://docs.python.org/3/library/json.html)- [yaml (PyYAML)](https://pyyaml.org/wiki/PyYAMLDocumentation)- [xml.etree.ElementTree](https://docs.python.org/3/library/xml.etree.elementtree.html)- [csv](https://docs.python.org/3/library/csv.html)
+## Deliverables
+- Standardized README describing objectives, prerequisites, grading, and tips.
+- Step-by-step INSTRUCTIONS with required log markers; artifacts created under data/ and logs/.
+- Grading: **75 points**
 
 Follow these steps in order.
 
@@ -134,6 +157,34 @@ Commit your changes; push; open a PR targeting `main`.
 **Log marker to add:**  
 `[LAB1_END]`
 
+
+## FAQ
+**Q:** Where should logs go?  
+**A:** Write to `logs/lab.log` and include the required markers listed in the README.
+
+**Q:** Why split code into modules?  
+**A:** It keeps functions/classes reusable and testing simpler; the main program stays small.
+
+
+## Grading Breakdown
+| Step | Requirement | Points |
+|---|---|---|
+| Step 2 | Dev Container opened; dependencies available | 5 |
+| Step 4 | JSON parsed successfully (`PARSE_JSON_SUCCESS`) | 5 |
+| Step 4 | YAML parsed successfully (`PARSE_YAML_SUCCESS`) | 5 |
+| Step 4 | XML parsed successfully (`PARSE_XML_SUCCESS`) | 5 |
+| Step 4 | CSV parsed successfully (`PARSE_CSV_SUCCESS`) | 5 |
+| Step 5 | At least one device summarized (`DEVICE_SUMMARY`) | 5 |
+| Step 6 | Interface message logged (`INTERFACE_MSG`) | 5 |
+| Step 6 | Device message logged (`DEVICE_MSG`) | 5 |
+| Step 6 | VLAN message logged (`VLAN_MSG`) | 5 |
+| Step 7 | Clean module structure (class + parser functions imported and used) | 10 |
+| Step 8 | Commit, push, and PR opened; logs present with start/end markers | 15 |
+| **Total** |  | **75** |
+
+## Autograder Notes
+- Log file: `logs/lab.log`
+- Required markers: `LAB1_START`, `[STEP 2] Dev Container Started`, `PARSE_JSON_SUCCESS`, `PARSE_YAML_SUCCESS`, `PARSE_XML_SUCCESS`, `PARSE_CSV_SUCCESS`, `DEVICE_SUMMARY`, `INTERFACE_MSG`, `DEVICE_MSG`, `VLAN_MSG`, `LAB1_END`
 
 ## Submission Checklist
 - [ ] `logs/lab.log` exists and includes LAB1_START/LAB1_END and all required markers.
