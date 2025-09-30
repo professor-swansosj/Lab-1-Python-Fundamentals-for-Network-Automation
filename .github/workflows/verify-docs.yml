@@ -52,6 +52,8 @@ jobs:
         run: |
           mkdir -p _render
           python _template/scripts/render.py lab.yml _render
+        env:
+          REPO_LABEL: ${{github.event.repository.name}}
 
       - name: Diff README
         if: ${{ github.repository != 'professor-swansosj/SDN-LAB-TEMPLATE' }}
