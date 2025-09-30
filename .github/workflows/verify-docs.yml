@@ -1,0 +1,51 @@
+name: Verify Docs
+on:
+  pull_request:
+    paths:
+      - "README.md"
+      - "INSTRUCTIONS.md"
+      - "lab.yml"
+      - ".markdownlint.json"
+      - ".markdownlintignore"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install jinja2 pyyaml
+
+      - name: Checkout SDN-LAB-TEMPLATE (the source of truth)
+        uses: actions/checkout@v4
+        with:
+          repository: professor-swansosj/SDN-LAB-TEMPLATE
+          path: _template
+          ref: main   # later we can pin to a tag/SHA for reproducibility
+
+      - name: Ensure lab.yml exists
+        run: |
+          if [ ! -f lab.yml ]; then
+            echo "::error ::lab.yml is missing in this lab repo"
+            exit 1
+          fi
+
+      - name: Render from template
+        run: |
+          mkdir -p _render
+          python _template/scripts/render.py lab.yml _render
+
+      - name: Diff README
+        run: |
+          diff -u --strip-trailing-cr README.md _render/README.md \
+            || (echo "::error file=README.md::README.md is out of date; re-render from template"; exit 1)
+
+      - name: Diff INSTRUCTIONS
+        run: |
+          diff -u --strip-trailing-cr INSTRUCTIONS.md _render/INSTRUCTIONS.md \
+            || (echo "::error file=INSTRUCTIONS.md::INSTRUCTIONS.md is out of date; re-render from template"; exit 1)
+
