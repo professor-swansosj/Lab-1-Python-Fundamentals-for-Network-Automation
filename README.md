@@ -1,207 +1,80 @@
-# Network Automation Fundamentals Assignment
+# Lab 1 — Python Fundamentals & Structured Data
 
-## :triangular_flag_on_post: Learning Goals
+**Course:** Software Defined Networking  
+**Module:** Network Automation Fundamentals • **Lab #:** 1  
+**Estimated Time:** 60–90 min
 
-- Work with Python Functions, Classes, and Methods
-- Impliment Exception and Error Handling
-- Working with structured data [`JSON, YAML, XML, CSV`]
+## Objectives
+- Build and use Python functions, classes, and methods.
+- Implement basic exception handling with try/except.
+- Work with structured data files: JSON, YAML, XML, and CSV.
+- Log meaningful events to a file for grading and troubleshooting.
+- Organize code into modules and run via the main guard.
 
+## Prerequisites
+- Python 3.11 (via the provided dev container)
+- Accounts: GitHub
+- Devices/Sandboxes: Local filesystem + sample structured data
 
-## :globe_with_meridians: Overview:
-
-From a network automation perspective we leverage more advanced features in Python that will be covered in this lab.  Features like Functions(), Classes, Methods, and Modules help to break our code up to be more readable and easier to work on. As a Network Automation professional you will find that structured data is heavily utilized. There are different forms of structured data and here we will focus on the following; JSON, YAML, XML, and CSV. To provide context at where you may see some of these here are some scenarios which would require knowlege of each.
-
-- Ansible = YAML (Used to write Ansible Playbooks)
-- REST API Calls = JSON (Requests to Restful API Servers are written and results returned in JSON)
-- NETCONF = XML (The NETCONF protocol uses XML to write it's requests and return results)
-- INVENTORY = CSV (Many appliances and automation tools uses CSV files to pass in the inventory of devices)
-
-### :wrench: Python Functions
-Building off the Basics in Python from your Scripting course one of the most useful features of Python is the ability to write your own functions(). A `Python Function` is simply a block of code that you can reuse. Rather than write giant single execution programs we break the code up into smaller blocks that we call functions(). A function can take different inputs known as arguments such as variables, lists, dictionaires, and tuples as an input that will be passed to the function upon execution. Functions do not require arguments to be passed in but it is common to see. For example a simply function that prints a message does not need anything else to execute successfully where a custom message that would require say a device hostname as part of the message will need that hostname passed in upon runtime. 
-
-### :package: Python Objects
-
-A Python object is a defined Class where the attributes of the class help to define an object. For example if I define an object as `Class Switch:` I may include attributes such as hostname, vendor, IP, vlans, and STP Priority where a `Class Router:` would include attributes such as hostname, vendor, IP, routing protocol, and router-id. Additionally you can add Methods to your Classes which are simply functions that relate to the Class. So if I created a method for my Switch: Class I would create a method such as `def configure_access_port(interface)` or for my Router Class `def configure_static_route(route)`. Notice the methods are just fucntions about whatever they are specific to the Class Object. A switch switches packets on a layer 2 network and a router routes packets across a layer 3 network. 
-
-### :rotating_light: Exceptions and Error Handling
-
-There may be times where our code is going to fail.  When a block of code fails you recieve two things of importance 1) The traceback on where the failure occured in the code. 2) The Exception that was raised which can be translated to the error message. When a Exception is raised in Python it halts the execution of the code where it is and produces these two items. However, what if we don't want our entire program to fail based on a minor error? This is where Error Handling and Exceptions come in. Using Pythons built in `Try:...Except:` features you can gracefully handle the error and how you want the program to procede whether that be printing the error to a file, stopping the program, or do nothing and continue with the code execution.
-
-### :page_facing_up: Logging
-
-A note on the logging syntax you see here. It is usually a good idea to capture all your logs to a file and export to a central logging system. Although we are not going to go too deep on logging know it is a standard feature and procedure when writing your code to write the logs to a file. We are doing it here for a very important reason which is **THE LOGS WRITTEN TO THE LOG FILE IS WHAT IS USED TO DETERMINE YOUR GRADE!!!** If your script does not produce any logs to the log file the file will be blank and therefore you will not receive credit for your work. Under each instruction I will inform you where you are to insert a logging message so I know the program executed with all the requirements.
-
-### JSON
-JSON stands for Javascript Object Notation and is heavily adopted in the industry especially for programming against APIs. JSON is represented as key:value pairs and are structured the exact same as a Python Dictionary. Below is a JSON Object that containers two network devices and is represented by their IP and device type. 
-
-```json
-[
-  {
-    "hostname": "core-sw01",
-    "ip": "192.168.1.1",
-    "type": "Switch"
-  },
-  {
-    "hostname": "edge-fw01",
-    "ip": "192.168.1.254",
-    "type": "Firewall"
-  }
-]
-```
-
-### YAML
-YAML or YAML Ain't Markup Language is a component of JSON that is meant for better readability by Humans. It utilizes indentation to represent variables, lists, and dictionaireies. Since it is a compontent of JSON any valid YAML file is also a valid JSON file. Below is a YAML Object which contains a list of interfaces and their attributes.
-
-```yaml
-interfaces:
-  - name: Gig0/1
-    status: up
-    vlan: 10
-  - name: Gig0/2
-    status: down
-    vlan: 20
-```
-
-### XML
-XML has been presented to network engineers for a long time already. The Cisco Nexus platform, Juniper, and Palo Alto all represent their configuration in XML. Heck the entire language of web pages `HTML` is XML. XML is not very human readable but great for machines to process. It uses the concept of tags `<>` and nested objects to represnt their informatoin. Every tag that is created must also be accompanied by a closing tag. Below we see some XML to represent a list of VLANS.
-
-```xml
-<vlans>
-  <vlan>
-    <id>10</id>
-    <name>Users</name>
-  </vlan>
-  <vlan>
-    <id>20</id>
-    <name>Servers</name>
-  </vlan>
-</vlans>
-```
-
-### CSV
-Finally CSV or Comma Separated Values is simply a list of items where the first line of the file represents the headers and each line represents a single objects attributes. Each attribute is separated by a comma as seen below.
-
-```csv
-hostname,location,role
-core-sw01,DataCenter,Switch
-edge-fw01,Branch,Firewall
-```
-
----
-
-## :card_file_box: File Structure:
-
-It is important to start to understand the file structure for a given project. In python we break our Classes, Data, and Functions in separate files and import them as modules to their respective code base. This eventually leaves you with a simple few lines of code called the `main guard` that will kick off the script typically represented as `if __name__ == __main__: main()` which says if the system variable of `__name__` is equal to `__main__` which is true when the file being executed is referenced as the main file. In example if the file is named "script.py" and I run the command `python script.py` the system variable will set `__name__` equal to `__main__` and we declare our main() function in this file which references our other files on import. You will see examples of this throughout this course and is the standard in Python. 
-
-```
-network-automation-lab/
-├── data/
-│   ├── devices.json
-│   ├── interfaces.yaml
-│   ├── vlans.xml
-│   └── inventory.csv
-├── logs/
-│   └── lab.log
-├── src/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── parser_utils.py
-│   └── network_device.py
-├── tests/
-│   └── test_lab.py
-├── .github/
-│   └── workflows/
-│       └── autograding.yml
-├── README.md
-└── requirements.txt
-```
-
----
-
-## Components:
-
-### 1. **Classes and Methods** (`network_device.py`)
-In python we define objects by defining the class. Think of an object as a way to represent anything in the real world. The attributes help to describe the object. Inside an object we can also define methods which are functions that are related to our object.
-```python
-import logging #This is where we import the built in python logging module
-
-class NetworkDevice: #Define our Class object of NetworkDevice
-    def __init__(self, hostname, ip, device_type): #Initialize the object as well as the attributes
-        self.hostname = hostname        #Define attribute hostname
-        self.ip = ip                    #Define attribute ip 
-        self.device_type = device_type  #Define attribute device_type
-
-    def summarize(self):  #Defined a module for our NetworkDevice Class
-        msg = f"{self.hostname} ({self.device_type}) - {self.ip}" #Creates a variable string dyanmically filled
-        logging.info(f"DEVICE_SUMMARY: {msg}")                    #Generates a log message to include the output
-        return msg        #Returns the output to the source code that called it
-```
-
-### 2. **Functions and Error Handling** (`parser_utils.py`)
-A python function is a block of code that can be called after it is defined. As a best practice you typically want to break up as much of your code as possible into mutliple functions. As a genneral guidline you should aim to have your functions be no longer than 20-30 lines of code. Most of the time you will need to pass information into your function so it can perform some type of logic on the data. In the function below we pass a path argument into the function `parse_json()`. With a path to a JSON file passed into the function the code attempts to open the file in read mode and load the data as a python object to be worked with.
-
-**Exceptions and Error Handling**  
-You will notice in this function the use of the syntax `try:` and `except` which is a python feature that allows you to gracefully handle errors in your code without it crashing the entire program. In our example below the function starts with the `try:` statement essentially saying "Try to open the file at this path and load the JSON data to convert it to a python object. If the path to a valid JSON file is correct the code executes as designed and returns the resulting python object. If the path is invalid say the file does not exist or is not a valid JSON file the program won't crash with a Traceback and Exception message. Instead it will create a error log message attaching the error to the log message and returns nothing.
-```python
-import json, yaml, xml.etree.ElementTree as ET, csv, logging
-
-def parse_json(path):
-    try:
-        with open(path, 'r') as f:
-            data = json.load(f)
-            logging.info(f"PARSE_JSON_SUCCESS: Loaded {len(data)} entries")
-            return data
-    except Exception as e:
-        logging.error(f"PARSE_JSON_ERROR: {e}")
-        return []
-
-# Similar functions for YAML, XML, CSV
-```
-
-### 3. **Main Application** (`main.py`)
-In the main application file we need to import all of our functions and classes so they can be utlizized by the main program. Here we define our `main()` function which is where the main logic of your program executes. To put this all into perspective we could have declared all of our functions and classes in a single python file or not broken up our code at all and made a single long program on one page. This is however a bad practice and fails to take advatage of pythons object oriented nature where we break up our objects and the logic of our code into classes and functions. Here we import them all to run the main purpose of our program in this case importing a network device as a static structured data file and summarize the device.
-```python
-import logging  #Imports logging as we are logging all of our codes output to a log file. 
-from src.parser_utils import parse_json, parse_yaml, parse_xml, parse_csv #Note this imports our functions in the src file
-from src.network_device import NetworkDevice #This is the import of our class object from the src file
-
-logging.basicConfig(filename='logs/lab.log', level=logging.INFO) #Logs output to the lab.log file
-
-def main():                       #This defines our main function which should be set to execute our imported function
-    json_devices = parse_json('data/devices.json') #Declares an object created from our immported function and JSON file
-    for d in json_devices:                         #Starts a for loop to loop over our JSON object
-        dev = NetworkDevice(d['hostname'], d['ip'], d['type']) #Creates a network device object using the JSON information
-        dev.summarize()  #Calls our objects method to summarize information about the object
-
-if __name__ == '__main__':  #The starting point for our code called the name-main idiom only true if this is the main file
-    main()                  #Executes the main function
-```
-
----
-## :memo: Instructions
-
-1. Build off the program that was provided to you. 
-2. In the `main()` function create python objects using the parsers that were defined in the `parser_utils.py` file and the structured data in the data directory. This will a python object of an inventory of devices, list of vlans, and network interfaces.
-3. Utlizizing whatever technique you wish the program should print the below messages to the terminal by accessing each object. Note: that below has a place holder for the attribute but your program should print the actual value of the attribute. 
-    - `Interface { interface.name } is { interface.status }`
-    - `Device { device.hostname } is a { device.location } { device.role }`
-    - `VLAN { vlan.id } is the { vlan.name }`
-4. Under each print statement include an INFO log message to create the a log message for each of the statements to the log file. The syntax for this is provided below. You only need to change the name of the message object.
-    - `logging.info(f"INTERFACE_MSG: {msg}")`
-    - `logging.info(f"DEVICE_MSG: {msg}")`
-    - `logging.info(f"VLAN_MSG: {msg}")`
-
----
-
-## ✅ Grading Points Breakdown (example)
-- 5 pts: JSON parsed correctly (`PARSE_JSON_SUCCESS` log)
-- 5 pts: At least one device summarized (`DEVICE_SUMMARY` log)
-- 5 pts: YAML parsed correctly (`PARSE_YAML_SUCCESS` log)
-- 5 pts: YAML Interface message (`INTERFACE_MSG` log)
-- 5 pts: YAML parsed correctly (`PARSE_CSV_SUCCESS` log)
-- 5 pts: YAML Interface message (`DEVICE_MSG` log)
-- 5 pts: YAML parsed correctly (`PARSE_XML_SUCCESS` log)
-- 5 pts: YAML Interface message (`VLAN_MSG` log)
----
+## Overview
+This lab warms up core Python skills for network automation. You’ll separate logic into modules (class + parsing helpers), read structured data (JSON, YAML, XML, CSV), and emit clear log lines that double as your grading criteria.
 
 
+## Resources
+- [Python logging](https://docs.python.org/3/library/logging.html)- [json](https://docs.python.org/3/library/json.html)- [yaml (PyYAML)](https://pyyaml.org/wiki/PyYAMLDocumentation)- [xml.etree.ElementTree](https://docs.python.org/3/library/xml.etree.elementtree.html)- [csv](https://docs.python.org/3/library/csv.html)
+
+## FAQ
+**Q:** Where should logs go?  
+**A:** Write to `logs/lab.log` and include the required markers listed in the README.
+
+**Q:** Why split code into modules?  
+**A:** It keeps functions/classes reusable and testing simpler; the main program stays small.
+
+
+
+## Deliverables
+- Standardized README describing objectives, prerequisites, grading, and tips.
+- Step-by-step INSTRUCTIONS with required log markers; artifacts created under data/ and logs/.
+- Grading: **75 points**
+
+## Grading Breakdown
+| Step | Requirement | Points |
+|---|---|---|
+| Step 2 | Dev Container opened; dependencies available | 5 |
+| Step 4 | JSON parsed successfully (`PARSE_JSON_SUCCESS`) | 5 |
+| Step 4 | YAML parsed successfully (`PARSE_YAML_SUCCESS`) | 5 |
+| Step 4 | XML parsed successfully (`PARSE_XML_SUCCESS`) | 5 |
+| Step 4 | CSV parsed successfully (`PARSE_CSV_SUCCESS`) | 5 |
+| Step 5 | At least one device summarized (`DEVICE_SUMMARY`) | 5 |
+| Step 6 | Interface message logged (`INTERFACE_MSG`) | 5 |
+| Step 6 | Device message logged (`DEVICE_MSG`) | 5 |
+| Step 6 | VLAN message logged (`VLAN_MSG`) | 5 |
+| Step 7 | Clean module structure (class + parser functions imported and used) | 10 |
+| Step 8 | Commit, push, and PR opened; logs present with start/end markers | 15 |
+| **Total** |  | **75** |
+
+## 🔧 Troubleshooting & Pro Tips
+**Dev container / dependencies**  
+*Symptom:* ImportError for yaml, csv, or XML libraries  
+*Fix:* Reopen in dev container; verify with `pip list`. If needed, run `pip install -r requirements.txt`.
+
+**Wrong data paths**  
+*Symptom:* FileNotFoundError when parsing `data/*`  
+*Fix:* Run from repo root and use relative paths like `data/devices.json`.
+
+**Empty or invalid JSON/YAML/XML**  
+*Symptom:* Parse errors or zero-length data  
+*Fix:* Use the provided sample files; validate formatting before parsing.
+
+**No logs written**  
+*Symptom:* `logs/lab.log` missing or empty  
+*Fix:* Call `logging.basicConfig(filename='logs/lab.log', level=logging.INFO)` once, near program start.
+
+
+
+## Autograder Notes
+- Log file: `logs/lab.log`
+- Required markers: `LAB1_START`, `[STEP 2] Dev Container Started`, `PARSE_JSON_SUCCESS`, `PARSE_YAML_SUCCESS`, `PARSE_XML_SUCCESS`, `PARSE_CSV_SUCCESS`, `DEVICE_SUMMARY`, `INTERFACE_MSG`, `DEVICE_MSG`, `VLAN_MSG`, `LAB1_END`
+
+## License
+© 2025 Your Name — Classroom use.
