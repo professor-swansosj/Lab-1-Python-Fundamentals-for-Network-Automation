@@ -1,4 +1,5 @@
 name: Verify Docs
+
 on:
   pull_request:
     paths:
@@ -7,7 +8,16 @@ on:
       - "lab.yml"
       - ".markdownlint.json"
       - ".markdownlintignore"
+  push:
+    branches: ["**"]   # run on pushes to any branch (including PR branches)
+    paths:
+      - "README.md"
+      - "INSTRUCTIONS.md"
+      - "lab.yml"
+      - ".markdownlint.json"
+      - ".markdownlintignore"
   workflow_dispatch:
+
 
 jobs:
   verify:
