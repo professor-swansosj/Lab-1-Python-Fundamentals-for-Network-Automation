@@ -2,6 +2,8 @@ name: Verify Docs
 
 on:
   pull_request:
+    branches: 
+      - main
     paths:
       - "README.md"
       - "INSTRUCTIONS.md"
