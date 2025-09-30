@@ -4,6 +4,20 @@ module: "Network Automation Fundamentals"
 lab_number: 1
 time_estimate: "60–90 min"
 
+repo_tree:
+  enabled: true
+  root: "."                # repo root
+  max_depth: 3             # keep trees short; change as you like
+  ignore:                  # glob patterns to skip (important for stability)
+    - "_template"
+    - "_render"
+    - "__pycache__"
+    - "node_modules"
+    - "venv"
+    - ".venv"
+    - "*.pyc"
+
+
 objectives:
   - "Build and use Python functions, classes, and methods."
   - "Implement basic exception handling with try/except."
@@ -273,6 +287,7 @@ steps:
     done_when: |
       - PR is open and CI passes.
     log_marker: "LAB1_END"
+
 
 
 
