@@ -80,3 +80,5 @@ This lab warms up core Python skills for network automation. You’ll separate l
 © 2025 Your Name — Classroom use.
 
 # HAPPY CODING!
+
+**Sincerely, Professor Swanson**
