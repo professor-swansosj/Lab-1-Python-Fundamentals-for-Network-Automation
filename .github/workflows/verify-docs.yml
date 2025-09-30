@@ -37,7 +37,7 @@ jobs:
         with:
           repository: professor-swansosj/SDN-LAB-TEMPLATE
           path: _template
-          ref: main
+          ref: v1.0
 
       - name: Ensure lab.yml exists
         if: ${{ github.repository != 'professor-swansosj/SDN-LAB-TEMPLATE' }}
