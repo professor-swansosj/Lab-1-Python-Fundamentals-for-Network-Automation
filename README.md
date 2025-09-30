@@ -22,6 +22,7 @@ This lab warms up core Python skills for network automation. You’ll separate l
 
 ## Resources
 - [Python logging](https://docs.python.org/3/library/logging.html)- [json](https://docs.python.org/3/library/json.html)- [yaml (PyYAML)](https://pyyaml.org/wiki/PyYAMLDocumentation)- [xml.etree.ElementTree](https://docs.python.org/3/library/xml.etree.elementtree.html)- [csv](https://docs.python.org/3/library/csv.html)
+## Lab Topics
 ### Python Functions
 Building off the Basics in Python from your Scripting course one of the most useful features  of Python is the ability to write your own functions(). A `Python Function` is simply a block  of code that you can reuse. Rather than write giant single execution programs we break the code  up into smaller blocks that we call functions(). A function can take different inputs known as  arguments such as variables, lists, dictionaires, and tuples as an input that will be passed to  the function upon execution. Functions do not require arguments to be passed in but it is common  to see. For example a simply function that prints a message does not need anything else to execute  successfully where a custom message that would require say a device hostname as part of the message  will need that hostname passed in upon runtime.  
 
