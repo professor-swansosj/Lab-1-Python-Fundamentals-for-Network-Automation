@@ -1,7 +1,7 @@
 # Require your approval on any change
-* @professor-swansosj
+* @professor-swansosj @sdn-standard-bot-fscj
 
 # (optional) Add your TA team too:
 # * @your-org/ta-team
 # workflows can stay explicitly on you if you want:
-.github/workflows/* @professor-swansosj
+.github/workflows/* @professor-swansosj @sdn-standard-bot-fscj
