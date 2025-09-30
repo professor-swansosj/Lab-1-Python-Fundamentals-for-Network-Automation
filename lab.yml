@@ -63,7 +63,7 @@ autograder:
     - "VLAN_MSG"
     - "LAB1_END"
 
-license: "© 2025 Your Name — Classroom use."
+license: "© 2025 Sheldon Swanson — Classroom use."
 
 readme_topic:
   - title: "Python Functions"
