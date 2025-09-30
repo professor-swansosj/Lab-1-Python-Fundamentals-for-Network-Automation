@@ -6,17 +6,21 @@ time_estimate: "60–90 min"
 
 repo_tree:
   enabled: true
-  root: "."                # repo root
-  max_depth: 3             # keep trees short; change as you like
-  ignore:                  # glob patterns to skip (important for stability)
+  max_depth: 3
+  ignore:
+    - ".git"
+    - ".github"
     - "_template"
     - "_render"
     - "__pycache__"
-    - "node_modules"
-    - "venv"
     - ".venv"
+    - "venv"
+    - "node_modules"
+    - ".vscode"
+    - ".idea"
     - "*.pyc"
-
+    - "logs"
+    - "screens"
 
 objectives:
   - "Build and use Python functions, classes, and methods."
