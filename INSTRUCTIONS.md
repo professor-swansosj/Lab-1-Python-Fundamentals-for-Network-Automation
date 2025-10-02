@@ -166,6 +166,24 @@ Commit your changes; push; open a PR targeting `main`.
 **A:** It keeps functions/classes reusable and testing simpler; the main program stays small.
 
 
+## 🔧 Troubleshooting & Pro Tips
+**Dev container / dependencies**  
+*Symptom:* ImportError for yaml, csv, or XML libraries  
+*Fix:* Reopen in dev container; verify with `pip list`. If needed, run `pip install -r requirements.txt`.
+
+**Wrong data paths**  
+*Symptom:* FileNotFoundError when parsing `data/*`  
+*Fix:* Run from repo root and use relative paths like `data/devices.json`.
+
+**Empty or invalid JSON/YAML/XML**  
+*Symptom:* Parse errors or zero-length data  
+*Fix:* Use the provided sample files; validate formatting before parsing.
+
+**No logs written**  
+*Symptom:* `logs/lab.log` missing or empty  
+*Fix:* Call `logging.basicConfig(filename='logs/lab.log', level=logging.INFO)` once, near program start.
+
+
 ## Grading Breakdown
 | Step | Requirement | Points |
 |---|---|---|

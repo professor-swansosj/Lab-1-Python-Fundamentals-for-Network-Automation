@@ -155,22 +155,58 @@ switch1,192.168.1.2,switch
 ```
 
 
-## 🔧 Troubleshooting & Pro Tips
-**Dev container / dependencies**  
-*Symptom:* ImportError for yaml, csv, or XML libraries  
-*Fix:* Reopen in dev container; verify with `pip list`. If needed, run `pip install -r requirements.txt`.
+## Python Best Practices
+### The main() Function
+In Python, it is a common practice to define a `main()` function that serves as the entry point for your program.  This function typically contains the main logic of your program and is called when the script is executed directly.  By using a `main()` function, you can keep your code organized and make it easier to read and maintain. Additionally,  it allows you to import your script as a module in other scripts without executing the main logic.
+To ensure that the `main()` function is only called when the script is executed directly (and not when it is imported  as a module), you can use the following conditional statement:
 
-**Wrong data paths**  
-*Symptom:* FileNotFoundError when parsing `data/*`  
-*Fix:* Run from repo root and use relative paths like `data/devices.json`.
 
-**Empty or invalid JSON/YAML/XML**  
-*Symptom:* Parse errors or zero-length data  
-*Fix:* Use the provided sample files; validate formatting before parsing.
+```python
+def main():
+    # Main logic goes here
+    pass
 
-**No logs written**  
-*Symptom:* `logs/lab.log` missing or empty  
-*Fix:* Call `logging.basicConfig(filename='logs/lab.log', level=logging.INFO)` once, near program start.
+if __name__ == "__main__":
+    main()
+
+```
+
+**NOTES:**
+In this example, the `main()` function is defined, and the conditional statement checks if the script is being run  directly (i.e., not imported as a module). If it is, the `main()` function is called. You will learn more about importing modules in the next lab.
+
+
+### Wrapping Your Code in Functions
+Wrapping your code in functions is a best practice in Python programming. It helps to keep your code organized,  modular, and reusable. By breaking your code into smaller functions, you can easily test and debug individual parts of your  program. Additionally, functions allow you to avoid code duplication, as you can call the same function multiple times with different arguments. When writing functions, it is important to give them descriptive names that clearly indicate their purpose. This makes it easier for others (and yourself) to understand what the function does without having to read through the entire code block. Additionally, you should  aim to keep your functions short and focused on a single task. As a general guideline, you should aim to have your functions be no longer  than 20-30 lines of code. If a function is getting too long, consider breaking it up into smaller helper functions. This will make your  code easier to read and maintain.
+
+
+```python
+def format_device_name(vendor, model):
+    """Return a clean, standardized device name like 'CISCO-C9300'."""
+    return f"{vendor.strip().upper()}-{model.strip().upper()}"
+
+def build_show_command(interface):
+    """Return a CLI command string for a given interface."""
+    return f"show interface {interface}"
+
+def main():
+    vendor = "cisco "
+    model = " c9300"
+    interface = "GigabitEthernet1/0/1"
+
+    device_name = format_device_name(vendor, model)
+    command = build_show_command(interface)
+
+    print(f"Device: {device_name}")
+    print(f"Command to run: {command}")
+
+if __name__ == "__main__":
+    main()
+
+```
+
+**NOTES:**
+In this example, we have two functions: `format_device_name()` and `build_show_command()`. Each function has a clear purpose and is focused  on a single task. The `main()` function calls these helper functions to perform the overall logic of the program. This structure makes the  code easier to read, understand, and maintain.
+
 
 
 ## License
