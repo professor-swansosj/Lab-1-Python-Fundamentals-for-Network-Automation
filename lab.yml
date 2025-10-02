@@ -227,7 +227,7 @@ python_practices:
 
       if __name__ == "__main__":
           main()
-    ```
+    
   code_notes: >
     In this example, the `main()` function is defined, and the conditional statement checks if the script is being run 
     directly (i.e., not imported as a module). If it is, the `main()` function is called. You will learn more about importing
