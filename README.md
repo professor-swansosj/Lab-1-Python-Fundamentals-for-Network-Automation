@@ -7,7 +7,7 @@
 ## Repository structure
 
 ```text
-target
+Lab-1-Python-Fundamentals-for-Network-Automation
 ├── .devcontainer
 │   └── devcontainer.json
 ├── .gitignore
