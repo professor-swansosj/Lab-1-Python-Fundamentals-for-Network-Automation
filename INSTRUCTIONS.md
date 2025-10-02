@@ -1,4 +1,4 @@
-# Instructions — Lab 1 — Python Fundamentals & Structured Data
+# Instructions — Lab 1 — Advanced Python for Network Automation
 
 ## Objectives
 - Build and use Python functions, classes, and methods.
