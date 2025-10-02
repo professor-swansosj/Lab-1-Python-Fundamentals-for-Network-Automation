@@ -1,8 +1,28 @@
-title: "Lab 1 — Python Fundamentals & Structured Data"
+# ==========================================
+# Course: Software Defined Networking
+# Module: Advanced Python for Network Automation
+# Purpose: Hands on activity for Python Functions, Classes/Objects, Error Handling, and Structured Data
+# Filename: lab.yml
+# Author: Sheldon Swanson
+# Version: 1.0
+# Created: 10/2025
+# Updated: 10/2025
+# Notes: Parsers ignore these comments.
+# ==========================================
+title: "Lab 1 — Advanced Python for Network Automation"
 course: "Software Defined Networking"
-module: "Network Automation Fundamentals"
+module: "Advanced Python for Network Automation"
 lab_number: 1
 time_estimate: "60–90 min"
+
+
+#====================================================
+#   ____  _____    _    ____  __  __ _____
+#  |  _ \| ____|  / \  |  _ \|  \/  | ____|
+#  | |_) |  _|   / _ \ | | | | |\/| |  _|
+#  |  _ <| |___ / ___ \| |_| | |  | | |___
+#  |_| \_\_____/_/   \_\____/|_|  |_|_____|
+#====================================================
 
 repo_tree:
   enabled: true
@@ -22,68 +42,8 @@ repo_tree:
     - "logs"
     - "screens"
 
-objectives:
-  - "Build and use Python functions, classes, and methods."
-  - "Implement basic exception handling with try/except."
-  - "Work with structured data files: JSON, YAML, XML, and CSV."
-  - "Log meaningful events to a file for grading and troubleshooting."
-  - "Organize code into modules and run via the main guard."
-
-python_version: "3.11"
-accounts: ["GitHub"]
-devices: ["Local filesystem + sample structured data"]
-
-deliverables:
-  readme_summary: "Standardized README describing objectives, prerequisites, grading, and tips."
-  instructions_summary: "Step-by-step INSTRUCTIONS with required log markers; artifacts created under data/ and logs/."
-
-grading:
-  total_points: 75
-  rows:
-    - { step: "Step 2", requirement: "Dev Container opened; dependencies available", points: 5 }
-    - { step: "Step 4", requirement: "JSON parsed successfully (`PARSE_JSON_SUCCESS`)", points: 5 }
-    - { step: "Step 4", requirement: "YAML parsed successfully (`PARSE_YAML_SUCCESS`)", points: 5 }
-    - { step: "Step 4", requirement: "XML parsed successfully (`PARSE_XML_SUCCESS`)", points: 5 }
-    - { step: "Step 4", requirement: "CSV parsed successfully (`PARSE_CSV_SUCCESS`)", points: 5 }
-    - { step: "Step 5", requirement: "At least one device summarized (`DEVICE_SUMMARY`)", points: 5 }
-    - { step: "Step 6", requirement: "Interface message logged (`INTERFACE_MSG`)", points: 5 }
-    - { step: "Step 6", requirement: "Device message logged (`DEVICE_MSG`)", points: 5 }
-    - { step: "Step 6", requirement: "VLAN message logged (`VLAN_MSG`)", points: 5 }
-    - { step: "Step 7", requirement: "Clean module structure (class + parser functions imported and used)", points: 10 }
-    - { step: "Step 8", requirement: "Commit, push, and PR opened; logs present with start/end markers", points: 15 }
-
-tips:
-  - title: "Dev container / dependencies"
-    symptom: "ImportError for yaml, csv, or XML libraries"
-    fix: "Reopen in dev container; verify with `pip list`. If needed, run `pip install -r requirements.txt`."
-  - title: "Wrong data paths"
-    symptom: "FileNotFoundError when parsing `data/*`"
-    fix: "Run from repo root and use relative paths like `data/devices.json`."
-  - title: "Empty or invalid JSON/YAML/XML"
-    symptom: "Parse errors or zero-length data"
-    fix: "Use the provided sample files; validate formatting before parsing."
-  - title: "No logs written"
-    symptom: "`logs/lab.log` missing or empty"
-    fix: "Call `logging.basicConfig(filename='logs/lab.log', level=logging.INFO)` once, near program start."
-
-autograder:
-  log_path: "logs/lab.log"
-  required_markers:
-    - "LAB1_START"
-    - "[STEP 2] Dev Container Started"
-    - "PARSE_JSON_SUCCESS"
-    - "PARSE_YAML_SUCCESS"
-    - "PARSE_XML_SUCCESS"
-    - "PARSE_CSV_SUCCESS"
-    - "DEVICE_SUMMARY"
-    - "INTERFACE_MSG"
-    - "DEVICE_MSG"
-    - "VLAN_MSG"
-    - "LAB1_END"
-
-license: "© 2025 Sheldon Swanson — Classroom use."
-
 readme_topic:
+
   - title: "Python Functions"
     content: >
       Building off the Basics in Python from your Scripting course one of the most useful features 
@@ -95,6 +55,23 @@ readme_topic:
       to see. For example a simply function that prints a message does not need anything else to execute 
       successfully where a custom message that would require say a device hostname as part of the message 
       will need that hostname passed in upon runtime.
+
+      A python function is a block of code that can be called after it is defined. As a best practice you 
+      typically want to break up as much of your code as possible into mutliple functions. As a genneral 
+      guidline you should aim to have your functions be no longer than 20-30 lines of code. Most of the time 
+      you will need to pass information into your function so it can perform some type of logic on the data. 
+      In the function below we pass a argument name to the function and then print a message using that name.
+
+    code_block:
+      language: python
+      code: |
+        def greeting(name): #Define a function called greeting that takes one argument name
+            print(f"Hello, {name}!") #Print a message using the name argument
+
+        name = "Sheldon" #Define a variable name
+
+        greeting(name) #Call the function greeting and pass in the variable name
+
   - title: "Python Classes/Objects"
     content: >
       Another powerful feature of Python is the ability to create your own `Classes` and `Objects`. 
@@ -104,6 +81,27 @@ readme_topic:
       like `hostname`, `ip_address`, and `device_type`, and methods like `connect()`, `disconnect()`, 
       and `get_status()`. You can then create multiple instances of the `NetworkDevice` class, each 
       representing a different network device.
+
+      In python we define objects by defining the class. Think of an object as a way to represent anything 
+      in the real world. The attributes help to describe the object. Inside an object we can also define 
+      methods which are functions that are related to our object.
+
+    code_block:
+      language: python
+      code: |
+        class NetworkDevice: #Define our Class object of NetworkDevice
+          def __init__(self, hostname, ip, device_type): #Initialize the object as well as the attributes
+              self.hostname = hostname        #Define attribute hostname
+              self.ip = ip                    #Define attribute ip 
+              self.device_type = device_type  #Define attribute device_type
+              self.vendor = "Cisco"           #Define attribute vendor with a default value of Cisco
+
+          def summarize(self): #Define a method called summarize
+              return f"{self.hostname} ({self.device_type}) - {self.ip}" #Return a summary string
+
+        device1 = NetworkDevice("router1", "192.168.1.1", "router") #Create an instance of the NetworkDevice class
+        print(device1.summarize()) #Call the summarize method on the device1 object
+
   - title: "Exceptions and Error Handling"
     content: >
       When writing code, it is common to encounter errors. Python provides a way to handle these errors 
@@ -112,6 +110,26 @@ readme_topic:
       allows you to catch and handle specific exceptions, preventing your program from crashing. For example, 
       when working with files, you might want to catch a `FileNotFoundError` if the file you are trying to 
       open does not exist.
+
+      You will notice in this function the use of the syntax `try:` and `except` which is a python feature that 
+      allows you to gracefully handle errors in your code without it crashing the entire program. In our example 
+      below we define the variable name with a integer value of 25 not a string. The function starts with the `try:` 
+      statement essentially saying "Try to perform this block of code which would print a message to the terminal as
+      a string. Problem is you can't concatenate a string and an integer so the code will raise a `TypeError` exception.
+      The `except` statement will catch the `TypeError` exception and assign it to the variable e. We can then print
+      the error message to the terminal. Meanwhile our code keeps executing without crashing the entire program.
+
+    code_block:
+      language: python
+      code: |
+
+        name = 25
+
+        try:
+            print(f"Hello, {name}!")  #This will raise an error because name is not a string
+        except TypeError as e:        #Catch the TypeError exception and assign it to variable e
+            print(f"Error: {e}")      #Print the error message
+
   - title: "JSON"
     content: >
       `JSON` (JavaScript Object Notation) is a lightweight data interchange format that is easy for humans 
@@ -119,6 +137,7 @@ readme_topic:
       data between a server and a web application, as well as for configuration files. In Python, you can 
       work with JSON data using the built-in `json` module, which provides methods for parsing JSON strings 
       into Python objects (like dictionaries and lists) and for converting Python objects back into JSON strings.
+
     code_block:
       language: json
       code: |
@@ -134,12 +153,14 @@ readme_topic:
             "device_type": "switch"
           }
         ]
+
   - title: "YAML"
     content: >
       `YAML` (YAML Ain't Markup Language) is a human-readable data serialization format that is often used for 
       configuration files and data exchange between languages with different data structures. In Python, you 
       can work with YAML data using the `PyYAML` library, which provides methods for parsing YAML strings into 
       Python objects and for converting Python objects back into YAML strings.
+
     code_block:
       language: yaml
       code: |
@@ -150,12 +171,14 @@ readme_topic:
           - name: GigabitEthernet0/2
             status: down
             description: Spare port
+
   - title: "XML"
     content: >
       `XML` (eXtensible Markup Language) is a markup language that defines a set of rules for encoding documents in a format 
       that is both human-readable and machine-readable. It is commonly used for data exchange between different systems and 
       applications. In Python, you can work with XML data using the built-in `xml.etree.ElementTree` module, which provides 
       methods for parsing XML strings into Python objects and for converting Python objects back into XML strings.
+
     code_block:
       language: xml
       code: |
@@ -171,17 +194,96 @@ readme_topic:
             <device_type>switch</device_type>
           </device>
         </devices>
+        
   - title: "CSV"
     content: >
       `CSV` (Comma-Separated Values) is a simple file format used to store tabular data, such as a spreadsheet or database. Each 
       line in a CSV file represents a row of data, and each value in the row is separated by a comma. In Python, you can work with 
       CSV data using the built-in `csv` module, which provides methods for reading and writing CSV files.
+
     code_block:
       language: csv
       code: |
         hostname,ip_address,device_type
         router1,192.168.1.1,router
         switch1,192.168.1.2,switch
+
+python_practices:
+  title: "The main() Function"
+  content: >
+    In Python, it is a common practice to define a `main()` function that serves as the entry point for your program. 
+    This function typically contains the main logic of your program and is called when the script is executed directly. 
+    By using a `main()` function, you can keep your code organized and make it easier to read and maintain. Additionally, 
+    it allows you to import your script as a module in other scripts without executing the main logic.
+
+    To ensure that the `main()` function is only called when the script is executed directly (and not when it is imported 
+    as a module), you can use the following conditional statement:
+  code_block:
+    language: python
+    code: |
+      def main():
+          # Main logic goes here
+          pass
+
+      if __name__ == "__main__":
+          main()
+    ```
+  code_notes: >
+    In this example, the `main()` function is defined, and the conditional statement checks if the script is being run 
+    directly (i.e., not imported as a module). If it is, the `main()` function is called. You will learn more about importing
+    modules in the next lab.
+
+  title: "Wrapping Your Code in Functions"
+  content: >
+    Wrapping your code in functions is a best practice in Python programming. It helps to keep your code organized, 
+    modular, and reusable. By breaking your code into smaller functions, you can easily test and debug individual parts of your 
+    program. Additionally, functions allow you to avoid code duplication, as you can call the same function multiple times with different arguments.
+    When writing functions, it is important to give them descriptive names that clearly indicate their purpose. This makes it easier
+    for others (and yourself) to understand what the function does without having to read through the entire code block. Additionally, you should 
+    aim to keep your functions short and focused on a single task. As a general guideline, you should aim to have your functions be no longer 
+    than 20-30 lines of code. If a function is getting too long, consider breaking it up into smaller helper functions. This will make your 
+    code easier to read and maintain.
+
+  code_block:
+    language: python
+    code: |
+      def format_device_name(vendor, model):
+          """Return a clean, standardized device name like 'CISCO-C9300'."""
+          return f"{vendor.strip().upper()}-{model.strip().upper()}"
+
+      def build_show_command(interface):
+          """Return a CLI command string for a given interface."""
+          return f"show interface {interface}"
+
+      def main():
+          vendor = "cisco "
+          model = " c9300"
+          interface = "GigabitEthernet1/0/1"
+
+          device_name = format_device_name(vendor, model)
+          command = build_show_command(interface)
+
+          print(f"Device: {device_name}")
+          print(f"Command to run: {command}")
+
+      if __name__ == "__main__":
+          main()
+
+  code_notes: >
+    In this example, we have two functions: `format_device_name()` and `build_show_command()`. Each function has a clear purpose and is focused 
+    on a single task. The `main()` function calls these helper functions to perform the overall logic of the program. This structure makes the 
+    code easier to read, understand, and maintain.
+
+
+#=====================================================
+#
+#   ___ _   _ ____ _____ ____  _   _  ____ _____ ___ ___  _   _ ____
+#  |_ _| \ | / ___|_   _|  _ \| | | |/ ___|_   _|_ _/ _ \| \ | / ___|
+#   | ||  \| \___ \ | | | |_) | | | | |     | |  | | | | |  \| \___ \
+#   | || |\  |___) || | |  _ <| |_| | |___  | |  | | |_| | |\  |___) |
+#  |___|_| \_|____/ |_| |_| \_\\___/ \____| |_| |___\___/|_| \_|____/
+#
+#=====================================================
 
 overview: >
   This lab warms up core Python skills for network automation. You’ll separate logic into
@@ -294,6 +396,66 @@ steps:
 
 
 
+objectives:
+  - "Build and use Python functions, classes, and methods."
+  - "Implement basic exception handling with try/except."
+  - "Work with structured data files: JSON, YAML, XML, and CSV."
+  - "Log meaningful events to a file for grading and troubleshooting."
+  - "Organize code into modules and run via the main guard."
+
+python_version: "3.11"
+accounts: ["GitHub"]
+devices: ["Local filesystem + sample structured data"]
+
+deliverables:
+  readme_summary: "Standardized README describing objectives, prerequisites, grading, and tips."
+  instructions_summary: "Step-by-step INSTRUCTIONS with required log markers; artifacts created under data/ and logs/."
+
+grading:
+  total_points: 75
+  rows:
+    - { step: "Step 2", requirement: "Dev Container opened; dependencies available", points: 5 }
+    - { step: "Step 4", requirement: "JSON parsed successfully (`PARSE_JSON_SUCCESS`)", points: 5 }
+    - { step: "Step 4", requirement: "YAML parsed successfully (`PARSE_YAML_SUCCESS`)", points: 5 }
+    - { step: "Step 4", requirement: "XML parsed successfully (`PARSE_XML_SUCCESS`)", points: 5 }
+    - { step: "Step 4", requirement: "CSV parsed successfully (`PARSE_CSV_SUCCESS`)", points: 5 }
+    - { step: "Step 5", requirement: "At least one device summarized (`DEVICE_SUMMARY`)", points: 5 }
+    - { step: "Step 6", requirement: "Interface message logged (`INTERFACE_MSG`)", points: 5 }
+    - { step: "Step 6", requirement: "Device message logged (`DEVICE_MSG`)", points: 5 }
+    - { step: "Step 6", requirement: "VLAN message logged (`VLAN_MSG`)", points: 5 }
+    - { step: "Step 7", requirement: "Clean module structure (class + parser functions imported and used)", points: 10 }
+    - { step: "Step 8", requirement: "Commit, push, and PR opened; logs present with start/end markers", points: 15 }
+
+tips:
+  - title: "Dev container / dependencies"
+    symptom: "ImportError for yaml, csv, or XML libraries"
+    fix: "Reopen in dev container; verify with `pip list`. If needed, run `pip install -r requirements.txt`."
+  - title: "Wrong data paths"
+    symptom: "FileNotFoundError when parsing `data/*`"
+    fix: "Run from repo root and use relative paths like `data/devices.json`."
+  - title: "Empty or invalid JSON/YAML/XML"
+    symptom: "Parse errors or zero-length data"
+    fix: "Use the provided sample files; validate formatting before parsing."
+  - title: "No logs written"
+    symptom: "`logs/lab.log` missing or empty"
+    fix: "Call `logging.basicConfig(filename='logs/lab.log', level=logging.INFO)` once, near program start."
+
+autograder:
+  log_path: "logs/lab.log"
+  required_markers:
+    - "LAB1_START"
+    - "[STEP 2] Dev Container Started"
+    - "PARSE_JSON_SUCCESS"
+    - "PARSE_YAML_SUCCESS"
+    - "PARSE_XML_SUCCESS"
+    - "PARSE_CSV_SUCCESS"
+    - "DEVICE_SUMMARY"
+    - "INTERFACE_MSG"
+    - "DEVICE_MSG"
+    - "VLAN_MSG"
+    - "LAB1_END"
+
+license: "© 2025 Sheldon Swanson — Classroom use."
 
 
 
