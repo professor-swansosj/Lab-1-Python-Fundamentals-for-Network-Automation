@@ -16,7 +16,6 @@ Lab-1-Python-Fundamentals-for-Network-Automation
 ├── .pettierrc.yml
 ├── INSTRUCTIONS.backup.md
 ├── INSTRUCTIONS.md
-├── README.backup.md
 ├── README.md
 ├── data
 │   ├── devices.json
