@@ -284,36 +284,61 @@ python_practices:
 #  |___|_| \_|____/ |_| |_| \_\\___/ \____| |_| |___\___/|_| \_|____/
 #
 #=====================================================
+# LAB 1 — ADVANCED PYTHON FOR NETWORK AUTOMATION
+# Software Defined Networking • Florida State College at Jacksonville
+# Worth 75 points
 
+# OBJECTIVES
+objectives:
+  - "Build and use Python functions, classes, and methods."
+  - "Implement basic exception handling with `try/except`."
+  - "Work with structured data formats: JSON, YAML, XML, and CSV."
+  - "Write logs to file for testing and autograding."
+  - "Organize code into modules and run via `main()` guard."
+
+# PREREQUISITES
+python_version: "3.11"
+accounts: ["GitHub"]
+devices: ["Local filesystem + sample structured data"]
+
+prereq:
+  - "Basic Python syntax (variables, loops, conditionals)."
+  - "Familiarity with JSON, YAML, XML, and CSV formats."
+  - "Git and GitHub basics (clone, commit, push, PR)."
+  - "Working with Files in Python."
+  - "Basic logging in Python."
+  - "VS Code and Dev Containers (or local Python setup)."
+
+# OVERVIEW
 overview: >
-  This lab warms up core Python skills for network automation. You’ll separate logic into
-  modules (class + parsing helpers), read structured data (JSON, YAML, XML, CSV), and emit
-  clear log lines that double as your grading criteria.
+  This first lab warms up your Python automation muscles. You'll refactor simple scripts into structured,
+  reusable modules with functions, classes, and exception handling. You'll parse structured data
+  (JSON, YAML, XML, CSV), write logs with the logging module, and output graded markers for autograding.
+  Each function and class should reside in its own file inside `src/`. By the end, you'll have a clean,
+  modular script that logs events for testing and serves as your foundation for later automation projects.
 
+# SETUP
 before_you_begin: >
   Open the dev container, confirm Python runs, and ensure you can list files under `data/`
   and write to `logs/`.
 
+# RESOURCES
 resources:
   - { title: "Python logging", url: "https://docs.python.org/3/library/logging.html" }
   - { title: "json", url: "https://docs.python.org/3/library/json.html" }
   - { title: "yaml (PyYAML)", url: "https://pyyaml.org/wiki/PyYAMLDocumentation" }
   - { title: "xml.etree.ElementTree", url: "https://docs.python.org/3/library/xml.etree.elementtree.html" }
   - { title: "csv", url: "https://docs.python.org/3/library/csv.html" }
+  - { title: "Reading and Writing Files", url: "https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files" }
 
-faq:
-  - q: "Where should logs go?"
-    a: "Write to `logs/lab.log` and include the required markers listed in the README."
-  - q: "Why split code into modules?"
-    a: "It keeps functions/classes reusable and testing simpler; the main program stays small."
+# DELIVERABLES
+deliverables:
+  - "`src/` contains: `main.py`, `parser_utils.py`, `network_device.py`."
+  - "`logs/lab.log` contains required markers and log lines."
+  - "Data files under `data/` (JSON, YAML, XML, CSV) successfully parsed."
+  - "Pull request open to main branch with all artifacts committed."
 
-submission_checklist:
-  - "`logs/lab.log` exists and includes LAB1_START/LAB1_END and all required markers."
-  - "Parser functions handle JSON, YAML, XML, and CSV without crashing."
-  - "At least one `DEVICE_SUMMARY` log line appears."
-  - "`INTERFACE_MSG`, `DEVICE_MSG`, and `VLAN_MSG` appear at least once each."
-  - "All code lives under `src/` and runs from `main.py`."
-
+# STEPS
 steps:
   - title: "Clone the Repository"
     goal: "Get the starter locally."
@@ -394,37 +419,12 @@ steps:
       - PR is open and CI passes.
     log_marker: "LAB1_END"
 
-
-
-objectives:
-  - "Build and use Python functions, classes, and methods."
-  - "Implement basic exception handling with try/except."
-  - "Work with structured data files: JSON, YAML, XML, and CSV."
-  - "Log meaningful events to a file for grading and troubleshooting."
-  - "Organize code into modules and run via the main guard."
-
-python_version: "3.11"
-accounts: ["GitHub"]
-devices: ["Local filesystem + sample structured data"]
-
-deliverables:
-  readme_summary: "Standardized README describing objectives, prerequisites, grading, and tips."
-  instructions_summary: "Step-by-step INSTRUCTIONS with required log markers; artifacts created under data/ and logs/."
-
-grading:
-  total_points: 75
-  rows:
-    - { step: "Step 2", requirement: "Dev Container opened; dependencies available", points: 5 }
-    - { step: "Step 4", requirement: "JSON parsed successfully (`PARSE_JSON_SUCCESS`)", points: 5 }
-    - { step: "Step 4", requirement: "YAML parsed successfully (`PARSE_YAML_SUCCESS`)", points: 5 }
-    - { step: "Step 4", requirement: "XML parsed successfully (`PARSE_XML_SUCCESS`)", points: 5 }
-    - { step: "Step 4", requirement: "CSV parsed successfully (`PARSE_CSV_SUCCESS`)", points: 5 }
-    - { step: "Step 5", requirement: "At least one device summarized (`DEVICE_SUMMARY`)", points: 5 }
-    - { step: "Step 6", requirement: "Interface message logged (`INTERFACE_MSG`)", points: 5 }
-    - { step: "Step 6", requirement: "Device message logged (`DEVICE_MSG`)", points: 5 }
-    - { step: "Step 6", requirement: "VLAN message logged (`VLAN_MSG`)", points: 5 }
-    - { step: "Step 7", requirement: "Clean module structure (class + parser functions imported and used)", points: 10 }
-    - { step: "Step 8", requirement: "Commit, push, and PR opened; logs present with start/end markers", points: 15 }
+# FAQ + TROUBLESHOOTING
+faq:
+  - q: "Where should logs go?"
+    a: "Write to `logs/lab.log` and include the required markers listed in the README."
+  - q: "Why split code into modules?"
+    a: "It keeps functions/classes reusable and testing simpler; the main program stays small."
 
 tips:
   - title: "Dev container / dependencies"
@@ -440,6 +440,23 @@ tips:
     symptom: "`logs/lab.log` missing or empty"
     fix: "Call `logging.basicConfig(filename='logs/lab.log', level=logging.INFO)` once, near program start."
 
+# GRADING
+grading:
+  total_points: 75
+  rows:
+    - { step: "Step 2", requirement: "Dev Container opened; dependencies available", points: 5 }
+    - { step: "Step 4", requirement: "JSON parsed successfully (`PARSE_JSON_SUCCESS`)", points: 5 }
+    - { step: "Step 4", requirement: "YAML parsed successfully (`PARSE_YAML_SUCCESS`)", points: 5 }
+    - { step: "Step 4", requirement: "XML parsed successfully (`PARSE_XML_SUCCESS`)", points: 5 }
+    - { step: "Step 4", requirement: "CSV parsed successfully (`PARSE_CSV_SUCCESS`)", points: 5 }
+    - { step: "Step 5", requirement: "At least one device summarized (`DEVICE_SUMMARY`)", points: 5 }
+    - { step: "Step 6", requirement: "Interface message logged (`INTERFACE_MSG`)", points: 5 }
+    - { step: "Step 6", requirement: "Device message logged (`DEVICE_MSG`)", points: 5 }
+    - { step: "Step 6", requirement: "VLAN message logged (`VLAN_MSG`)", points: 5 }
+    - { step: "Step 7", requirement: "Clean module structure (class + parser functions imported and used)", points: 10 }
+    - { step: "Step 8", requirement: "Commit, push, and PR opened; logs present with start/end markers", points: 15 }
+
+# AUTOGRADING
 autograder:
   log_path: "logs/lab.log"
   required_markers:
@@ -455,9 +472,12 @@ autograder:
     - "VLAN_MSG"
     - "LAB1_END"
 
+# SUBMISSION CHECKLIST
+submission_checklist:
+  - "`logs/lab.log` exists and includes LAB1_START/LAB1_END and all required markers."
+  - "Parser functions handle JSON, YAML, XML, and CSV without crashing."
+  - "At least one `DEVICE_SUMMARY` log line appears."
+  - "`INTERFACE_MSG`, `DEVICE_MSG`, and `VLAN_MSG` appear at least once each."
+  - "All code lives under `src/` and runs from `main.py`."
+
 license: "© 2025 Sheldon Swanson — Classroom use."
-
-
-
-
-
