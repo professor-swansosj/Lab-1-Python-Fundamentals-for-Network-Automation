@@ -2,28 +2,36 @@
 
 ## Objectives
 - Build and use Python functions, classes, and methods.
-- Implement basic exception handling with try/except.
-- Work with structured data files: JSON, YAML, XML, and CSV.
-- Log meaningful events to a file for grading and troubleshooting.
-- Organize code into modules and run via the main guard.
+- Implement basic exception handling with `try/except`.
+- Work with structured data formats: JSON, YAML, XML, and CSV.
+- Write logs to file for testing and autograding.
+- Organize code into modules and run via `main()` guard.
 
 ## Prerequisites
 - Python 3.11 (via the provided dev container)
 - Accounts: GitHub
 - Devices/Sandboxes: Local filesystem + sample structured data
+- Technical: - Basic Python syntax (variables, loops, conditionals).
+- Familiarity with JSON, YAML, XML, and CSV formats.
+- Git and GitHub basics (clone, commit, push, PR).
+- Working with Files in Python.
+- Basic logging in Python.
+- VS Code and Dev Containers (or local Python setup).
 
 ## Overview
-This lab warms up core Python skills for network automation. You’ll separate logic into modules (class + parsing helpers), read structured data (JSON, YAML, XML, CSV), and emit clear log lines that double as your grading criteria.
+This first lab warms up your Python automation muscles. You'll refactor simple scripts into structured, reusable modules with functions, classes, and exception handling. You'll parse structured data (JSON, YAML, XML, CSV), write logs with the logging module, and output graded markers for autograding. Each function and class should reside in its own file inside `src/`. By the end, you'll have a clean, modular script that logs events for testing and serves as your foundation for later automation projects.
 
 
 > **Before you begin:** Open the dev container, confirm Python runs, and ensure you can list files under `data/` and write to `logs/`.
 
 
 ## Resources
-- [Python logging](https://docs.python.org/3/library/logging.html)- [json](https://docs.python.org/3/library/json.html)- [yaml (PyYAML)](https://pyyaml.org/wiki/PyYAMLDocumentation)- [xml.etree.ElementTree](https://docs.python.org/3/library/xml.etree.elementtree.html)- [csv](https://docs.python.org/3/library/csv.html)
+- [Python logging](https://docs.python.org/3/library/logging.html)- [json](https://docs.python.org/3/library/json.html)- [yaml (PyYAML)](https://pyyaml.org/wiki/PyYAMLDocumentation)- [xml.etree.ElementTree](https://docs.python.org/3/library/xml.etree.elementtree.html)- [csv](https://docs.python.org/3/library/csv.html)- [Reading and Writing Files](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
 ## Deliverables
-- Standardized README describing objectives, prerequisites, grading, and tips.
-- Step-by-step INSTRUCTIONS with required log markers; artifacts created under data/ and logs/.
+- `src/` contains: `main.py`, `parser_utils.py`, `network_device.py`.
+- `logs/lab.log` contains required markers and log lines.
+- Data files under `data/` (JSON, YAML, XML, CSV) successfully parsed.
+- Pull request open to main branch with all artifacts committed.
 - Grading: **75 points**
 
 Follow these steps in order.
@@ -37,7 +45,7 @@ Follow these steps in order.
 Clone your Classroom repo and `cd` into it. Review the provided `data/` files and `src/` layout.
 
 
-**You’re done when:**  
+**You're done when:**  
 - You are in the repo folder and see `data/`, `logs/`, and `src/`.
 - You created `logs/` if it didn’t exist.
 
@@ -52,7 +60,7 @@ Clone your Classroom repo and `cd` into it. Review the provided `data/` files an
 Reopen in container and wait for the first-time install to finish. Verify `python --version`.
 
 
-**You’re done when:**  
+**You're done when:**  
 - Python prints a version (3.11+).
 - You append `[STEP 2] Dev Container Started` to the log.
 
@@ -68,7 +76,7 @@ In `src/network_device.py`, implement/confirm the `NetworkDevice` class with `su
 that logs `DEVICE_SUMMARY: <hostname> (<type>) - <ip>`.
 
 
-**You’re done when:**  
+**You're done when:**  
 - A call to `summarize()` returns a string and writes a `DEVICE_SUMMARY` line to the log.
 
 
@@ -83,7 +91,7 @@ In `src/parser_utils.py`, implement `parse_json()`, `parse_yaml()`, `parse_xml()
 On success, log `PARSE_*_SUCCESS`; on failure, log `PARSE_*_ERROR` and return an empty list.
 
 
-**You’re done when:**  
+**You're done when:**  
 - Running the script produces `PARSE_JSON_SUCCESS`, `PARSE_YAML_SUCCESS`,
   `PARSE_XML_SUCCESS`, and `PARSE_CSV_SUCCESS` in the log.
 
@@ -100,7 +108,7 @@ Load `data/devices.json` (and other files) using your parser helpers.
 For each device, build a `NetworkDevice` and call `summarize()`.
 
 
-**You’re done when:**  
+**You're done when:**  
 - Device summaries are printed and logged.
 
 
@@ -121,7 +129,7 @@ After each print, log:
   - `logging.info(f"VLAN_MSG: {msg}")`
 
 
-**You’re done when:**  
+**You're done when:**  
 - Terminal shows the three message types at least once.
 - Log file includes `INTERFACE_MSG`, `DEVICE_MSG`, and `VLAN_MSG`.
 
@@ -136,7 +144,7 @@ After each print, log:
 Ensure only `main.py` runs the workflow; helpers stay importable and short.
 
 
-**You’re done when:**  
+**You're done when:**  
 - Code style is clean; modules are < ~100 lines each.
 
 
@@ -150,7 +158,7 @@ Ensure only `main.py` runs the workflow; helpers stay importable and short.
 Commit your changes; push; open a PR targeting `main`.
 
 
-**You’re done when:**  
+**You're done when:**  
 - PR is open and CI passes.
 
 
