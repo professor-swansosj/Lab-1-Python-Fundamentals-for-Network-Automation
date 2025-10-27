@@ -13,8 +13,6 @@ Lab-1-Python-Fundamentals-for-Network-Automation
 ├── .gitignore
 ├── .markdownlint.json
 ├── .markdownlintignore
-├── .pettierrc.yml
-├── INSTRUCTIONS.backup.md
 ├── INSTRUCTIONS.md
 ├── README.md
 ├── data
@@ -23,13 +21,6 @@ Lab-1-Python-Fundamentals-for-Network-Automation
 │   ├── inventory.csv
 │   └── vlans.xml
 ├── lab.yml
-├── prettierrc.yml
-├── requirements.txt
-└── src
-    ├── __init__.py
-    ├── main.py
-    ├── network_device.py
-    └── parser_utils.py
 ```
 
 ## Lab Topics

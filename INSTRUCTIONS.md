@@ -20,6 +20,18 @@
 - Basic logging in Python.
 - VS Code and Dev Containers (or local Python setup).
 
+## Table of Contents
+
+1. [Step 1 — Clone the Repository](#step-1--clone-the-repository)
+2. [Step 2 — Open Dev Container](#step-2--open-dev-container)
+3. [Step 3 — Implement `NetworkDevice` class](#step-3--implement-networkdevice-class)
+4. [Step 4 — Implement parser helpers](#step-4--implement-parser-helpers)
+5. [Step 5 — Wire up `main.py`](#step-5--wire-up-mainpy)
+6. [Step 6 - Impliment the Direct Execution Check](#step-6---impliment-the-direct-execution-check)
+7. [Step 7 — Print + log required messages](#step-7--print--log-required-messages)
+8. [Step 8 — Refactor & tidy](#step-8--refactor--tidy)
+9. [Step 9 — Commit, push, and open PR](#step-9--commit-push-and-open-pr)
+
 ## Overview
 
 This first lab warms up your Python automation muscles. You'll refactor simple scripts into structured,
