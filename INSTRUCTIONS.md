@@ -42,7 +42,8 @@ events for testing and serves as your foundation for later automation projects.
 
 ## Deliverables
 
-- `src/` contains: `main.py`, `parser_utils.py`, `network_device.py`.
+- Script executed from a main file and main() function using imports statements for functionns and classes
+- `src/` contains: `parser_utils.py` and `network_device.py`.
 - `logs/lab.log` contains required markers and log lines.
 - Data files under `data/` (JSON, YAML, XML, CSV) successfully parsed.
 - Pull request open to main branch with all artifacts committed.
@@ -61,11 +62,8 @@ Clone your Classroom repo and `cd` into it. Review the provided `data/` files an
 
 **You're done when:**  
 
-- You are in the repo folder and see `data/`, `logs/`, and `src/`.
+- You are in the repo folder and see `data/` and `logs/`.
 - You created `logs/` if it didn’t exist.
-
-**Log marker to add:**  
-`[LAB1_START]`
 
 ## Step 2 — Open Dev Container
 
@@ -77,24 +75,34 @@ Reopen in container and wait for the first-time install to finish. Verify `pytho
 **You're done when:**  
 
 - Python prints a version (3.11+).
-- You append `[STEP 2] Dev Container Started` to the log.
+- Your code is launched in a devcontainer via Visual Studio Code
 
-**Log marker to add:**  
-`[[STEP 2] Dev Container Started]`
+### **TIP**
+
+You can access the shell of your devonainer easily by selecting the menu item "Terminal" and "New Terminal"
+if one is not already launched for you.
 
 ## Step 3 — Implement `NetworkDevice` class
 
 **Goal:** Model a network device and log a summary.
 
-**What to do:**  
-In `src/network_device.py`, implement/confirm the `NetworkDevice` class with `summarize()`
-that logs `DEVICE_SUMMARY: <hostname> (<type>) - <ip>`.
+**What to do:**
+Create a `src/` directory and create a file nnamed `network_device.py` in the directory. Create
+and impilment a class named `NetworkDevice` complete with the following attributes:
+
+- hostname
+- ip
+- type
+
+Create a class method for the `NetworkDevice` class named summarize that prints annd logs
+basic information about the device. Use `loggging` to include a log message as follows:
+`[DEVICE_SUMMARY]: <hostname> (<type>) - <ip>`
 
 **You're done when:**  
 
 - A call to `summarize()` returns a string and writes a `DEVICE_SUMMARY` line to the log.
 
-**Log marker to add:**  
+**Log marker:**  
 `[DEVICE_SUMMARY]`
 
 ## Step 4 — Implement parser helpers
@@ -102,15 +110,23 @@ that logs `DEVICE_SUMMARY: <hostname> (<type>) - <ip>`.
 **Goal:** Parse each structured data file safely.
 
 **What to do:**  
-In `src/parser_utils.py`, implement `parse_json()`, `parse_yaml()`, `parse_xml()`, and `parse_csv()`.
-On success, log `PARSE_*_SUCCESS`; on failure, log `PARSE_*_ERROR` and return an empty list.
+In `src/`, create a file called `parser_utils.py` and implement `parse_json()`, `parse_yaml()`, `parse_xml()`, and `parse_csv()`.
+On success, logging should log `PARSE_*_SUCCESS`; on failure, log `PARSE_*_ERROR` and return an empty list.
+
+Your functions should have error handling built into to handle the following errors:
+
+- The `open()` function: `FileNotFound`
+- JSON module: `JSONDecodeError`
+- YAML module: `YAMLError`
+- `xml.etree.ElementTree` module: `ParseError`
+- csv Module: `Error`
 
 **You're done when:**  
 
 - Running the script produces `PARSE_JSON_SUCCESS`, `PARSE_YAML_SUCCESS`,
-  `PARSE_XML_SUCCESS`, and `PARSE_CSV_SUCCESS` in the log.
+  `PARSE_XML_SUCCESS`, and `PARSE_CSV_SUCCESS` in the log. The final execution of your code should not error out.
 
-**Log marker to add:**  
+**Log marker:**  
 `[PARSE_JSON_SUCCESS, PARSE_YAML_SUCCESS, PARSE_XML_SUCCESS, PARSE_CSV_SUCCESS]`
 
 ## Step 5 — Wire up `main.py`
@@ -118,18 +134,36 @@ On success, log `PARSE_*_SUCCESS`; on failure, log `PARSE_*_ERROR` and return an
 **Goal:** Load data, build objects, and summarize.
 
 **What to do:**  
-In `src/main.py`, configure logging to `logs/lab.log` once.
+Create the `main.py` file as your entry point to the program.
+In `main.py`, configure logging to `logs/lab.log` once.
 Load `data/devices.json` (and other files) using your parser helpers.
 For each device, build a `NetworkDevice` and call `summarize()`.
+Wrap your execution code in a `main()` function.
 
 **You're done when:**  
 
 - Device summaries are printed and logged.
 
-**Log marker to add:**  
+**Log marker:**  
 `[DEVICE_SUMMARY]`
 
-## Step 6 — Print + log required messages
+## Step 6 - Impliment the Direct Execution Check
+
+**Goal:** Require that the code is executed directly from the `main.py` file
+
+**What to do:**
+Impliment the Direct Execution Check
+Include a log message before the `main()` function for `[LAB1-START]`
+Include a log message after the `main()` function for `[LAB1-END]`
+
+**You're done when:**
+
+- Your main function only executes if called directly
+
+**Log Marker**
+`[LAB1-START, LAB1-END]`
+
+## Step 7 — Print + log required messages
 
 **Goal:** Echo required lines for grading.
 
@@ -149,10 +183,10 @@ After each print, log:
 - Terminal shows the three message types at least once.
 - Log file includes `INTERFACE_MSG`, `DEVICE_MSG`, and `VLAN_MSG`.
 
-**Log marker to add:**  
+**`loggging` marker to add:**  
 `[INTERFACE_MSG, DEVICE_MSG, VLAN_MSG]`
 
-## Step 7 — Refactor & tidy
+## Step 8 — Refactor & tidy
 
 **Goal:** Keep modules clean and imports explicit.
 
@@ -163,10 +197,7 @@ Ensure only `main.py` runs the workflow; helpers stay importable and short.
 
 - Code style is clean; modules are < ~100 lines each.
 
-**Log marker to add:**  
-`[MODULES_OK]`
-
-## Step 8 — Commit, push, and open PR
+## Step 9 — Commit, push, and open PR
 
 **Goal:** Submit work for grading.
 
@@ -176,9 +207,6 @@ Commit your changes; push; open a PR targeting `main`.
 **You're done when:**  
 
 - PR is open and CI passes.
-
-**Log marker to add:**  
-`[LAB1_END]`
 
 ## FAQ
 
@@ -200,7 +228,7 @@ Commit your changes; push; open a PR targeting `main`.
 
 **Empty or invalid JSON/YAML/XML**  
 *Symptom:* Parse errors or zero-length data  
-*Fix:* Use the provided sample files; validate formatting before parsing.
+*Fix:* Use the provided sample files; validate formatting before parsing. Your error handling should catch this if it happens.
 
 **No logs written**  
 *Symptom:* `logs/lab.log` missing or empty  
@@ -219,20 +247,22 @@ Commit your changes; push; open a PR targeting `main`.
 | Step 6 | Interface message logged (`INTERFACE_MSG`) | 5 |
 | Step 6 | Device message logged (`DEVICE_MSG`) | 5 |
 | Step 6 | VLAN message logged (`VLAN_MSG`) | 5 |
-| Step 7 | Clean module structure (class + parser functions imported and used) | 10 |
-| Step 8 | Commit, push, and PR opened; logs present with start/end markers | 15 |
+| Step 7 | Lab Start message logged (`LAB1-START`) | 5 |
+| Step 7 | Lab End message logged (`LAB1-END`) | 5 |
+| Step 8 | Clean module structure (class + parser functions imported and used) | 10 |
+| Step 9 | Commit, push, and PR opened; logs present with start/end markers | 5 |
 | **Total** |  | **75** |
 
 ## Autograder Notes
 
 - Log file: `logs/lab.log`
-- Required markers: `LAB1_START`, `[STEP 2] Dev Container Started`, `PARSE_JSON_SUCCESS`, `PARSE_YAML_SUCCESS`,
+- Required markers: `LAB1_START`, `PARSE_JSON_SUCCESS`, `PARSE_YAML_SUCCESS`,
   `PARSE_XML_SUCCESS`, `PARSE_CSV_SUCCESS`, `DEVICE_SUMMARY`, `INTERFACE_MSG`, `DEVICE_MSG`, `VLAN_MSG`, `LAB1_END`
 
 ## Submission Checklist
 
 - [ ] `logs/lab.log` exists and includes LAB1_START/LAB1_END and all required markers.
 - [ ] Parser functions handle JSON, YAML, XML, and CSV without crashing.
-- [ ] At least one `DEVICE_SUMMARY` log line appears.
-- [ ] `INTERFACE_MSG`, `DEVICE_MSG`, and `VLAN_MSG` appear at least once each.
-- [ ] All code lives under `src/` and runs from `main.py`.
+- [ ] The `DEVICE_SUMMARY` log line appears.
+- [ ] `INTERFACE_MSG`, `DEVICE_MSG`, and `VLAN_MSG` appear.
+- [ ] All functions and classes lives under `src/` and runs from `main.py`.

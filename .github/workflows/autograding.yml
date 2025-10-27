@@ -13,17 +13,25 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install dependencies
+    - name: Verify files exist
       run: |
-        pip install -r requirements.txt
+        test -f main.py
+        test -f src/parser_utils.py
+        test -f src/network_device.py
+
+    - name: Verify imports
+      run: |
+        grep -q "from src.parser_utils import" main.py
+        grep -q "from src.network_device import" main.py
 
     - name: Run student script
       run: |
         mkdir -p logs
-        python src/main.py
+        python main.py
 
     - name: Check logs
       run: |
+        gret -q "LAB1_START" logs/lab.log
         grep -q "PARSE_JSON_SUCCESS" logs/lab.log
         grep -q "PARSE_YAML_SUCCESS" logs/lab.log
         grep -q "PARSE_XML_SUCCESS" logs/lab.log
@@ -32,3 +40,4 @@ jobs:
         grep -q "INTERFACE_MSG" logs/lab.log
         grep -q "DEVICE_MSG" logs/lab.log
         grep -q "VLAN_MSG" logs/lab.log
+        grep -q "LAB1_END" logs/lab.log
