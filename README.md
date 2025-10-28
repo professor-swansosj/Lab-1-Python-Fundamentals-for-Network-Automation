@@ -84,8 +84,8 @@ def some_function()
 - The .markdownlint.json file
 - The .markdownlintignore file
 
-Any other files will altered will result in abnormal behavior of the lab. If you feel you have altered it beyond repair
-simply clone another fresh copy.
+Altering other files will result in abnormal behavior of the lab. If you feel you have altered it beyond repair simply
+clone another fresh copy
 
 ## License
 
